@@ -4,13 +4,16 @@ from manimlib.imports import *
 class Jacobi(Scene):
 
     def construct(self):
-        self.scene1()
+        # self.scene1()
+        # self.wait(2)
+        # self.clear()
+        # self.scene2()
+        # self.wait(2)
+        # self.clear()
+        # self.scene3()
+        # self.wait(2)
+        self.scene4()
         self.wait(2)
-        self.clear()
-        self.scene2()
-        self.wait(2)
-        self.clear()
-
 
     def scene1(self):
         texto1 = TextMobject("Seja:")
@@ -132,3 +135,50 @@ class Jacobi(Scene):
         texto = TexMobject("A = D + L + U", tex_to_color_map={"D": YELLOW, "U": RED, "L": GREEN})
         self.play(Transform(texto2, texto))
         self.wait(1)
+
+
+    def scene3(self):
+        texto1 = TextMobject("\\justify Logo podemos escrever $Ax = b$ como $(D+L+U)x = b$ \\\ Ou ainda, podemos transformar a equação em:")
+        texto1.to_edge(UP + LEFT)
+        self.play(Write(texto1))
+        self.wait(1)
+
+        texto2 = TextMobject("$$Dx = (L+ U)x + b$$ E, se $D^{-1}$ existe, então, se $a_{ii} \\neq 0$ para cada $i$, temos: $$x = D^{-1}(L +U)x + D^{-1}b$$")
+        texto2.next_to(texto1, BOTTOM)
+        self.play(Write(texto2))
+        self.wait(1)
+        self.clear()
+
+
+        texto3 = TextMobject("Forma iterativa de Jacobi: $$x^{(k)} = D^{-1}(L + U)x^{(k-1)} + D^{-1}b $$")
+        texto3.to_edge(UP)
+        self.play(Write(texto3))
+        self.wait(1)
+
+        texto4 = TextMobject("Essa forma é mais utilizada em uma abordagem teorica, \\\ para uma abordagem mais computacional temos o seguinte: $$x^{(k)} = \\frac{1}{a_{ii}}\\left[\\sum_{j=1}^{n} (-a_{ij}x_{j}^{(k-1)}) + b_i \\right], \\quad i = 1,2, \dots, n, \\,\\, j \\neq i$$")
+        texto4.next_to(texto3, BOTTOM)
+        self.play(Write(texto4))
+
+
+    def scene4(self):
+        texto1 = TextMobject("Dado o sistema na forma $Ax = b$: ")
+
+        sistema = TexMobject("\\begin{bmatrix} 10 & -1 & 2 & 0 \\\ -1 & 11 & -1 & 3 \\\ 2 & -1 & 10 & -1 \\\ 0 & 3 & -1 & 8 \\end{bmatrix} \\cdot \\begin{bmatrix} x_1 \\\ x_2 \\\ x_3 \\\ x_4 \\end{bmatrix} = \\begin{bmatrix} 6 \\\ 25 \\\ -11 \\\ 15 \\end{bmatrix}")
+
+        texto1.to_edge(UP)
+        sistema.next_to(texto1, BOTTOM)
+
+        self.add(texto1)
+        self.add(sistema)
+
+        self.wait(1)
+        self.clear()
+        
+        texto2 = TextMobject("$x^{(0)} = (0,0,0,0)$, critério de parada: $$\\frac{||x^{(k)} - x^{(k-1)}||_{\\infty}}{||x^{(k)}||_{\\infty}} < 10^{-3}$$")
+        self.add(texto2)
+
+        self.clear()
+
+        texto3 = TextMobject("Isolando $x_{i}$: ")
+
+        equations = TexMobject("$$x_{1} = \\frac{1}{10}x_2 - \\frac{1}{5}x_{3} + \\frac{3}{5} \\\ x_{2} =   \\\ x_{3} =  \\\ x_{4} =  $$") 
