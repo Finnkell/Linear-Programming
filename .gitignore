@@ -1,2 +1,11 @@
 /__pycache__
+/manimlib/__pycache__
+/manimlib/animation/__pycache__
+/manimlib/camera/__pycache__
+/manimlib/container/__pycache__
+/manimlib/for_3b1b_videos/__pycache__
+/manimlib/mobject/__pycache__
+/manimlib/once_useful_constructs/__pycache__
+/manimlib/scene/__pycache__
+/manimlib/utils/__pycache__
 /media
