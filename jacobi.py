@@ -181,10 +181,10 @@ class Jacobi(Scene):
 
         texto3 = TextMobject("Isolando $x_{i}$: ")
 
-        x_1 = TexMobject("x_{1} = \\frac{1}{10}x_2 - \\frac{1}{5}x_{3} + \\frac{3}{5}", tex_to_color_map={"x_{1}": GREEN})
-        x_2 = TexMobject("x_{2} = \\frac{1}{11}x_1 + \\frac{1}{11}x_3 - \\frac{3}{11}x_4 + \\frac{25}{11}", tex_to_color_map={"x_{2}": RED})
-        x_3 = TexMobject("x_{3} = -\\frac{1}{5}x_1 + \\frac{1}{10}x_2 + \\frac{1}{10}x_4 - \\frac{11}{10} ", tex_to_color_map={"x_{3}": YELLOW})
-        x_4 = TexMobject("x_{4} = -\\frac{3}{8}x_2 + \\frac{1}{8}x_3 + \\frac{15}{8}", tex_to_color_map={"x_{4}": BLUE})
+        x_1 = TexMobject("x_{1} = 0x_1 + \\frac{1}{10}x_2 - \\frac{1}{5}x_3 + 0x_4 + \\frac{3}{5}", tex_to_color_map={"x_{1}": GREEN})
+        x_2 = TexMobject("x_{2} = \\frac{1}{11}x_1 + 0x_2 + \\frac{1}{11}x_3 - \\frac{3}{11}x_4 + \\frac{25}{11}", tex_to_color_map={"x_{2}": RED})
+        x_3 = TexMobject("x_{3} = -\\frac{1}{5}x_1 + \\frac{1}{10}x_2 + 0x_3 +\\frac{1}{10}x_4 - \\frac{11}{10} ", tex_to_color_map={"x_{3}": YELLOW})
+        x_4 = TexMobject("x_{4} = 0x_1 -\\frac{3}{8}x_2 + \\frac{1}{8}x_3 + 0x_4 +\\frac{15}{8}", tex_to_color_map={"x_{4}": BLUE})
 
         x_1.to_edge(UP + LEFT)
         x_1.align_to(LEFT)
