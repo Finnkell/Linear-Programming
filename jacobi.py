@@ -181,4 +181,68 @@ class Jacobi(Scene):
 
         texto3 = TextMobject("Isolando $x_{i}$: ")
 
-        equations = TexMobject("$$x_{1} = \\frac{1}{10}x_2 - \\frac{1}{5}x_{3} + \\frac{3}{5} \\\ x_{2} =   \\\ x_{3} =  \\\ x_{4} =  $$") 
+        x_1 = TexMobject("x_{1} = \\frac{1}{10}x_2 - \\frac{1}{5}x_{3} + \\frac{3}{5}", tex_to_color_map={"x_{1}": GREEN})
+        x_2 = TexMobject("x_{2} = \\frac{1}{11}x_1 + \\frac{1}{11}x_3 - \\frac{3}{11}x_4 + \\frac{25}{11}", tex_to_color_map={"x_{2}": RED})
+        x_3 = TexMobject("x_{3} = -\\frac{1}{5}x_1 + \\frac{1}{10}x_2 + \\frac{1}{10}x_4 - \\frac{11}{10} ", tex_to_color_map={"x_{3}": YELLOW})
+        x_4 = TexMobject("x_{4} = -\\frac{3}{8}x_2 + \\frac{1}{8}x_3 + \\frac{15}{8}", tex_to_color_map={"x_{4}": BLUE})
+
+        x_1.to_edge(UP + LEFT)
+        x_1.align_to(LEFT)
+        x_1.shift(RIGHT)
+        x_2.next_to(x_1, BOTTOM)
+        x_2.align_to(x_1, LEFT)
+        x_3.next_to(x_2, BOTTOM)
+        x_3.align_to(x_2, LEFT)
+        x_4.next_to(x_3, BOTTOM)
+        x_4.align_to(x_3, LEFT)
+
+        self.add(x_1, x_2, x_3, x_4)
+
+        self.wait(.5)
+        self.clear()
+        
+        texto4 = TextMobject("Aproximação inicial: $x^{(0)} = (0,0,0,0)$")
+        texto4.to_edge(UP + LEFT)
+        self.add(texto4)
+        
+        x_1 = TexMobject("x_{1}^{(1)} = \\frac{1}{10}x_2^{(0)} - \\frac{1}{5}x_{3}^{(0)} + \\frac{3}{5} = 0.6000", tex_to_color_map={"x_{1}^{(1)}": GREEN})
+        x_2 = TexMobject("x_{2}^{(1)} = \\frac{1}{11}x_1^{(0)} + \\frac{1}{11}x_3^{(0)} - \\frac{3}{11}x_4^{(0)} + \\frac{25}{11} = 2.2727", tex_to_color_map={"x_{2}^{(1)}": RED})
+        x_3 = TexMobject("x_{3}^{(1)} = -\\frac{1}{5}x_1^{(0)} + \\frac{1}{10}x_2^{(0)} + \\frac{1}{10}x_4^{(0)} - \\frac{11}{10} = -1.1000", tex_to_color_map={"x_{3}^{(1)}": YELLOW})
+        x_4 = TexMobject("x_{4}^{(1)} = -\\frac{3}{8}x_2^{(0)} + \\frac{1}{8}x_3^{(0)} + \\frac{15}{8} = 1.8750", tex_to_color_map={"x_{4}^{(1)}": BLUE})
+
+        equations = [x_1, x_2, x_3, x_4]
+
+        for eq in equations:
+            eq.scale(.8)
+
+        x_1.next_to(texto4, DOWN)
+        x_1.align_to(0.5*LEFT)
+        x_2.next_to(x_1, BOTTOM)
+        x_2.align_to(x_1, LEFT)
+        x_3.next_to(x_2, BOTTOM)
+        x_3.align_to(x_2, LEFT)
+        x_4.next_to(x_3, BOTTOM)
+        x_4.align_to(x_3, LEFT)
+
+        self.add(x_1, x_2, x_3, x_4)
+        self.wait(.5)
+        self.clear()
+
+        texto5 = TextMobject("Iterando em $x^{(k)} = (x_1^{(k)}, x_2^{(k)}, x_3^{(k)}, x_4^{(k)})$")
+        texto5.to_edge(UP + LEFT)
+        self.add(texto5)
+
+        table = """ \\def\\arraystretch{1.7}
+        \\begin{tabular}{c|c|c|c|c|c|c}
+            $k$ & 0 & 1 & 2 & 3 & $\\cdots$ & 10 \\\ \\hline
+            $x^{(k)}_1$ & 0.0000 & 0.6000 & 1.0473 & 0.9326 & $\\cdots$ & 1.0001  \\\ 
+            $x^{(k)}_2$ & 0.0000 & 2.2727 & 1.7159 & 2.053 & $\\cdots$ & 1.9998  \\\ 
+            $x^{(k)}_3$ & 0.0000 & $-1.1000$ & $-0.8052$ & $-1.0493$ & $\\cdots$ & $-0.9998$  \\\ 
+            $x^{(k)}_4$ & 0.0000 & 1.8750 & 0.8852 & 1.1309 & $\\cdots$ & 0.9998 \\\ \\hline
+        \\end{tabular}
+        """
+
+        tabela = TexMobject(table, tex_to_color_map={})
+        self.add(tabela)
+
+        self.wait(1)
