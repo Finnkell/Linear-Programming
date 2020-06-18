@@ -1,3 +1,4 @@
+/.vscode
 /__pycache__
 /manimlib/__pycache__
 /manimlib/animation/__pycache__

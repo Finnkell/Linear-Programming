@@ -22,6 +22,7 @@ class Jacobi(Scene):
         matrix2 = TexMobject("X = \\begin{bmatrix} x_{1} \\\ x_{2} \\\ \\vdots \\\ x_{n} \\end{bmatrix} \\mbox{ e  }")
         matrix3 = TexMobject("b = \\begin{bmatrix} b_{1} \\\ b_{2} \\\ \\vdots \\\ b_{n} \\end{bmatrix}")
 
+
         texto1.to_edge(UP + LEFT)
         matrix2.move_to(matrix1, RIGHT)
         matrix3.next_to(matrix2, RIGHT)
@@ -177,8 +178,9 @@ class Jacobi(Scene):
         texto2 = TextMobject("$x^{(0)} = (0,0,0,0)$, critério de parada: $$\\frac{||x^{(k)} - x^{(k-1)}||_{\\infty}}{||x^{(k)}||_{\\infty}} < 10^{-3}$$")
         self.add(texto2)
 
+        self.wait(.5)
         self.clear()
-
+        
         texto3 = TextMobject("Isolando $x_{i}$: ")
 
         x_1 = TexMobject("x_{1} = 0x_1 + \\frac{1}{10}x_2 - \\frac{1}{5}x_3 + 0x_4 + \\frac{3}{5}", tex_to_color_map={"x_{1}": GREEN})
@@ -186,7 +188,7 @@ class Jacobi(Scene):
         x_3 = TexMobject("x_{3} = -\\frac{1}{5}x_1 + \\frac{1}{10}x_2 + 0x_3 +\\frac{1}{10}x_4 - \\frac{11}{10} ", tex_to_color_map={"x_{3}": YELLOW})
         x_4 = TexMobject("x_{4} = 0x_1 -\\frac{3}{8}x_2 + \\frac{1}{8}x_3 + 0x_4 +\\frac{15}{8}", tex_to_color_map={"x_{4}": BLUE})
 
-        x_1.to_edge(UP + LEFT)
+        x_1.to_edge(UP)
         x_1.align_to(LEFT)
         x_1.shift(RIGHT)
         x_2.next_to(x_1, BOTTOM)
@@ -196,9 +198,20 @@ class Jacobi(Scene):
         x_4.next_to(x_3, BOTTOM)
         x_4.align_to(x_3, LEFT)
 
+        texto3.to_corner(UL)
+
+        equations = [x_1, x_2, x_3, x_4]
+        
+        for eq in equations:
+            eq.scale(.8)
+
+        texto3.scale(.8)
+
+
+        self.add(texto3)
         self.add(x_1, x_2, x_3, x_4)
 
-        self.wait(.5)
+        self.wait(1)
         self.clear()
         
         texto4 = TextMobject("Aproximação inicial: $x^{(0)} = (0,0,0,0)$")
@@ -245,4 +258,23 @@ class Jacobi(Scene):
         tabela = TexMobject(table, tex_to_color_map={})
         self.add(tabela)
 
+        self.wait(1)
+        self.clear()
+
+        texto6 = TextMobject("Nos paramos depois de 10 iterações porque: ")
+        
+        normcheck = TexMobject("\\frac{\\left\\lVert x^{(10)} - x^{(9)} \\right\\rVert _{\\infty}}{\\left\\lVert x^{(10)} \\right\\rVert_{\\infty}} = \\frac{8.0 \\times 10^{-4}}{1.9998} < 10^{-3}.")
+
+        texto7 = TextMobject("De fato, $ \\norm{x^{(10)} - x}_{\\infty} = 0.0002 $")
+
+        texto6.to_corner(UL)
+        self.play(Write(texto6))
+        self.wait(.5)
+
+        normcheck.move_to(UP)
+        self.play(FadeIn(normcheck))
+        self.wait(1)
+
+        texto7.move_to(LEFT + DOWN)
+        self.play(FadeIn(texto7))
         self.wait(1)
