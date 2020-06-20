@@ -159,9 +159,11 @@ class Jacobi(Scene):
         texto4 = TextMobject("Essa forma é mais utilizada em uma abordagem teorica, \\\ para uma abordagem mais computacional temos o seguinte: $$x^{(k)} = \\frac{1}{a_{ii}}\\left[\\sum_{j=1}^{n} (-a_{ij}x_{j}^{(k-1)}) + b_i \\right], \\quad i = 1,2, \dots, n, \\,\\, j \\neq i$$")
         texto4.next_to(texto3, BOTTOM)
         self.play(Write(texto4))
+        self.clear()
 
 
-    def scene4(self):
+class Scene4(Scene):
+    def construct(self):
         texto1 = TextMobject("Dado o sistema na forma $Ax = b$: ")
 
         sistema = TexMobject("\\begin{bmatrix} 10 & -1 & 2 & 0 \\\ -1 & 11 & -1 & 3 \\\ 2 & -1 & 10 & -1 \\\ 0 & 3 & -1 & 8 \\end{bmatrix} \\cdot \\begin{bmatrix} x_1 \\\ x_2 \\\ x_3 \\\ x_4 \\end{bmatrix} = \\begin{bmatrix} 6 \\\ 25 \\\ -11 \\\ 15 \\end{bmatrix}")
@@ -169,16 +171,16 @@ class Jacobi(Scene):
         texto1.to_edge(UP)
         sistema.next_to(texto1, BOTTOM)
 
-        self.add(texto1)
-        self.add(sistema)
+        self.play(Write(texto1))
+        self.play(Write(sistema))
 
-        self.wait(1)
+        self.wait(3)
         self.clear()
         
         texto2 = TextMobject("$x^{(0)} = (0,0,0,0)$, critério de parada: $$\\frac{||x^{(k)} - x^{(k-1)}||_{\\infty}}{||x^{(k)}||_{\\infty}} < 10^{-3}$$")
-        self.add(texto2)
+        self.play(Write(texto2))
 
-        self.wait(.5)
+        self.wait(3)
         self.clear()
         
         texto3 = TextMobject("Isolando $x_{i}$: ")
@@ -207,16 +209,15 @@ class Jacobi(Scene):
 
         texto3.scale(.8)
 
-
-        self.add(texto3)
-        self.add(x_1, x_2, x_3, x_4)
+        self.play(Write(texto3))
+        self.play(Write(x_1), Write(x_2), Write(x_3), Write(x_4))
 
         self.wait(1)
         self.clear()
         
         texto4 = TextMobject("Aproximação inicial: $x^{(0)} = (0,0,0,0)$")
         texto4.to_edge(UP + LEFT)
-        self.add(texto4)
+        self.play(Write(texto4))
         
         x_1 = TexMobject("x_{1}^{(1)} = \\frac{1}{10}x_2^{(0)} - \\frac{1}{5}x_{3}^{(0)} + \\frac{3}{5} = 0.6000", tex_to_color_map={"x_{1}^{(1)}": GREEN})
         x_2 = TexMobject("x_{2}^{(1)} = \\frac{1}{11}x_1^{(0)} + \\frac{1}{11}x_3^{(0)} - \\frac{3}{11}x_4^{(0)} + \\frac{25}{11} = 2.2727", tex_to_color_map={"x_{2}^{(1)}": RED})
@@ -237,13 +238,13 @@ class Jacobi(Scene):
         x_4.next_to(x_3, BOTTOM)
         x_4.align_to(x_3, LEFT)
 
-        self.add(x_1, x_2, x_3, x_4)
-        self.wait(.5)
+        self.play(Write(x_1), Write(x_2), Write(x_3), Write(x_4))
+        self.wait(3)
         self.clear()
 
         texto5 = TextMobject("Iterando em $x^{(k)} = (x_1^{(k)}, x_2^{(k)}, x_3^{(k)}, x_4^{(k)})$")
         texto5.to_edge(UP + LEFT)
-        self.add(texto5)
+        self.play(Write(texto5))
 
         table = """ \\def\\arraystretch{1.7}
         \\begin{tabular}{c|c|c|c|c|c|c}
@@ -256,9 +257,9 @@ class Jacobi(Scene):
         """
 
         tabela = TexMobject(table, tex_to_color_map={})
-        self.add(tabela)
+        self.play(FadeIn(tabela))
 
-        self.wait(1)
+        self.wait(3)
         self.clear()
 
         texto6 = TextMobject("Nos paramos depois de 10 iterações porque: ")
@@ -277,4 +278,59 @@ class Jacobi(Scene):
 
         texto7.move_to(LEFT + DOWN)
         self.play(FadeIn(texto7))
-        self.wait(1)
+        self.wait(3)
+
+
+
+class OpeningQuote(Scene):
+    def construct(self):
+        words = TextMobject(
+            """
+            ``There is hardly any theory which is more elementary 
+            than linear algebra, in spite of the fact that generations 
+            of professors and textbook writers have obscured its 
+            simplicity by preposterous calculations with matrices.''
+
+            ``Quase não existe uma teoria que seja mais elementar 
+            que a álgebra linear, apesar de gerações de professores e 
+            redatores de livros didáticos terem obscurecido 
+            sua simplicidade por cálculos absurdos com matrizes.''
+            """, 
+            organize_left_to_right = False
+        )
+        words.set_width(2*(FRAME_X_RADIUS-1))
+        words.to_edge(UP)        
+        for mob in words.submobjects[48:49+13]:
+            mob.set_color(GREEN)
+        author = TextMobject("-Jean Dieudonn\\'e")
+        author.set_color(YELLOW)
+        author.next_to(words, DOWN)
+
+        self.play(FadeIn(words))
+        self.wait(3)
+        self.play(Write(author, run_time = 5))
+        self.wait()
+
+
+
+class OpeningTitle(Scene):
+    def construct(self):
+        title = TextMobject("Método Iterativo de Jacobi")
+        title.scale(2)
+        title.set_color(BLUE)
+        self.play(Write(title, run_time = 5))
+
+
+class EndingTitle(Scene):
+    def construct(self):
+        title = TextMobject("Obrigado!")
+        github = TextMobject("github.com/Finnkell/Linear-Programming")
+        title.scale(2)
+        title.set_color(BLUE)
+
+        github.set_color(YELLOW)
+        github.next_to(title, DOWN)
+        self.play(Write(title, run_time = 5))
+        self.play(Write(github, run_time = 3))
+
+        self.wait(3)
