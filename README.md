@@ -6,12 +6,13 @@ Before starting to clone the repository and going to test it out, you need to pr
 
 ### Requirements
 
-1. [FFmpeg](https://ffmpeg.zeranoe.com/builds/).
-2. [PyCairo](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pycairo).
-Make sure to have `` pip `` lastest version, and download the file correspontent to your currenty python version.
-Ex: After `` python --version `` in my case it is 3.8. So a must to download pycairo cp38, whose currespond to my python version.
+1. [FFmpeg](https://ffmpeg.zeranoe.com/builds/)
+2. [PyCairo](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pycairo)
 
-1. [Latex](https://miktex.org/download)s
+Make sure to have `` pip `` lastest version, and download the file correspontent to your currenty python version.
+Ex.: After `` python --version ``, in my case it is 3.8, so i must download pycairo cp38, whose currespond to my python version.
+
+1. [LaTex](https://miktex.org/download)
 2. [Sox](https://sourceforge.net/projects/sox/files/sox/)
 3. Python packages dependencies.
 ```bash
